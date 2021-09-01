@@ -1,0 +1,1 @@
+sudo apt install gcc libgl1-mesa-dev xorg-dev
