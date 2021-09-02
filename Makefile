@@ -3,3 +3,6 @@ prepare:
 
 win:
 	fyne-cross windows -arch=*
+
+icon:
+	fyne bundle logo.png > icon.go
