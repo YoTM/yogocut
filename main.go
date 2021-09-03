@@ -13,9 +13,15 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
+type userInput struct {
+	link 	string
+	start 	string
+	finish 	string
+}
+
 func main() {
 	myApp := app.New()
-	myWindow := myApp.NewWindow("Yogocut v.0.2")
+	myWindow := myApp.NewWindow("Yogocut v.0.3")
 	myWindow.SetIcon(resourceLogoPng)
 	myWindow.CenterOnScreen()
 	myWindow.Resize(fyne.NewSize(600, 300))
@@ -44,7 +50,15 @@ func main() {
 
 	downloadBtn := widget.NewButton(
 		"Download", 
-		func(){downloadVideo(resOutput, "http://youtu.be/video")},
+		func(){
+			// Get work data
+			data := userInput{
+				link: linkInput.Text,
+				start: startInput.Text,
+				finish: finishInput.Text,
+			}
+			downloadVideo(resOutput, &data)
+		},
 	)
 
 	content := container.NewVBox(
@@ -64,6 +78,8 @@ func tidyUp() {
 	fmt.Println("Exited")
 }
 
-func downloadVideo(obj *widget.Entry, link string) {
-	obj.SetText(link + " completed!")
+func downloadVideo(outObj *widget.Entry, data *userInput) {
+	fmt.Println(data.link)
+	fmt.Println(data.start, data.finish)
+	outObj.SetText(data.link + " completed!")
 }
